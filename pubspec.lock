@@ -49,14 +49,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
-  consolelog:
-    dependency: "direct main"
-    description:
-      name: consolelog
-      sha256: "8e536707a414738cd4aba875b6b0ad607c648b46e60b7e1ee3eb912d6f24b6ee"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -192,6 +184,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      sha256: "7ad7215c15420a102ec687bb320a7312afd449bac63bfb1c60d9787c27b9767f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
   matcher:
     dependency: transitive
     description:

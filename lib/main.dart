@@ -1,7 +1,9 @@
-import 'package:consolelog/consolelog.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+final Logger logger = Logger();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -19,33 +21,37 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      String title = message.notification?.title ?? "Cannot get title";
+      String body = message.notification?.body ?? "Cannot get body";
+
       setState(() {
-        String title = message.notification?.title ?? "Cannot get title";
-        String body = message.notification?.body ?? "Cannot get body";
-        messageText = "Push Messaging message:\n$title\n$body\n";
+        messageText = "Push Messaging message:\n$title\n$body";
       });
-      console.log("onMessage: $message");
+
+      logger.d("Message body: $body");
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      String title = message.notification?.title ?? "Cannot get title";
+      String body = message.notification?.body ?? "Cannot get body";
+
       setState(() {
-        String title = message.notification?.title ?? "Cannot get title";
-        String body = message.notification?.body ?? "Cannot get body";
-        messageText = "Push Messaging message:\n$title\n$body\n";
+        messageText = "Push Messaging message:\n$title\n$body";
       });
-      console.log("onMessageOpenedApp: $message");
+
+      logger.d("Message body: $body");
     });
 
     FirebaseMessaging.instance
         .requestPermission(sound: true, badge: true, alert: true)
-        .then((value) => console.log("Settings registered: $value"));
+        .then((value) => logger.i("Settings registered: $value"));
 
     FirebaseMessaging.instance.getToken().then((token) {
       assert(token != null);
       setState(() {
         homeScreenText = "Push Messaging token: $token";
       });
-      console.log('Token: $token');
+      logger.d('Token: $token');
     });
   }
 
